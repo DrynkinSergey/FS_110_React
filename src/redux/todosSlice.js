@@ -1,4 +1,4 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, isAnyOf } from '@reduxjs/toolkit';
 import { addTodoThunk, deleteTodo, editTodoThunk, fetchData } from './operations';
 
 const initialState = {
@@ -50,24 +50,27 @@ const slice = createSlice({
         state.todos = action.payload;
         state.isLoading = false;
       })
-      .addCase(fetchData.rejected, (state, action) => {
-        state.isError = action.payload;
-        state.isLoading = false;
-      })
-      .addCase(fetchData.pending, (state, action) => {
+
+      .addMatcher(isAnyOf(addTodoThunk.pending, editTodoThunk.pending, deleteTodo.pending, fetchData.pending), (state, action) => {
         state.isLoading = true;
         state.isError = false;
       })
-      .addCase(deleteTodo.fulfilled, (state, action) => {
-        state.todos = state.todos.filter(item => item.id !== action.payload.id);
-      })
-      .addCase(addTodoThunk.fulfilled, (state, action) => {
-        state.todos.push(action.payload);
-      })
-      .addCase(editTodoThunk.fulfilled, (state, action) => {
-        const item = state.todos.find(item => item.id === action.payload.id);
-        item.todo = action.payload.todo;
+
+      .addMatcher(isAnyOf(addTodoThunk.rejected, editTodoThunk.rejected, deleteTodo.rejected, fetchData.rejected), (state, action) => {
+        state.isError = action.payload;
+        state.isLoading = false;
       });
+
+    // .addCase(deleteTodo.fulfilled, (state, action) => {
+    //   state.todos = state.todos.filter(item => item.id !== action.payload.id);
+    // })
+    // .addCase(addTodoThunk.fulfilled, (state, action) => {
+    //   state.todos.push(action.payload);
+    // })
+    // .addCase(editTodoThunk.fulfilled, (state, action) => {
+    //   const item = state.todos.find(item => item.id === action.payload.id);
+    //   item.todo = action.payload.todo;
+    // });
   },
 });
 
