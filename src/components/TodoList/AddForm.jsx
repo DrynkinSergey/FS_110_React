@@ -3,18 +3,16 @@ import s from './TodoList.module.css';
 import { useDispatch } from 'react-redux';
 import { nanoid } from '@reduxjs/toolkit';
 import { addTodo } from '../../redux/todosSlice';
+import { addTodoThunk } from '../../redux/operations';
 
 export const AddForm = () => {
   const dispatch = useDispatch();
   const initialValues = { todo: '' };
   const onSubmit = (values, options) => {
     const newTodo = {
-      id: nanoid(),
       todo: values.todo,
-      isCompleted: false,
-      isFavorite: false,
     };
-    dispatch(addTodo(newTodo));
+    dispatch(addTodoThunk(newTodo));
     options.resetForm();
   };
 
