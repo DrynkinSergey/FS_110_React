@@ -6,6 +6,7 @@ import s from './TodoList.module.css';
 import { fetchData } from '../../redux/operations';
 import { useEffect } from 'react';
 import { selectIsError, selectIsLoading } from '../../redux/todosSlice';
+import Filter from './Filter';
 export const TodoList = () => {
   const dispatch = useDispatch();
   useEffect(() => {
@@ -18,6 +19,7 @@ export const TodoList = () => {
     <div className={s.todoWrapper}>
       <AddForm />
       <SearchBar />
+      <Filter />
       <List />
       {isError && <h2>Something went wrong!</h2>}
       {isLoading && <h2>Loading...</h2>}

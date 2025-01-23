@@ -1,7 +1,7 @@
 const Header = () => {
   return (
     <header>
-      <h2>Redux toolkit + Async</h2>
+      <h2>Redux toolkit + Selectors</h2>
     </header>
   );
 };
