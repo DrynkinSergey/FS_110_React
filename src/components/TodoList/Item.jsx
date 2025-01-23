@@ -2,13 +2,13 @@ import { useDispatch } from 'react-redux';
 import s from './TodoList.module.css';
 import { toggleFavorite } from '../../redux/todosSlice';
 import { FaStar } from 'react-icons/fa';
-import { deleteTodo, editTodoThunk } from '../../redux/operations';
+import { deleteTodo, editTodoThunk, toggleTodo } from '../../redux/operations';
 
 const Item = ({ isCompleted, todo, id, isFavorite }) => {
   const dispatch = useDispatch();
   return (
     <li className={s.item}>
-      <input type='checkbox' checked={isCompleted} />
+      <input type='checkbox' checked={isCompleted} onChange={() => dispatch(toggleTodo({ isCompleted: !isCompleted, todo, id, isFavorite }))} />
       <p>
         {isFavorite && <FaStar color='gold' />} {todo}
       </p>

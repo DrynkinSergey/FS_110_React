@@ -50,3 +50,12 @@ export const editTodoThunk = createAsyncThunk('todos/editTodo', async (body, thu
     return thunkAPI.rejectWithValue(error.message);
   }
 });
+
+export const toggleTodo = createAsyncThunk('todos/toggle', async (body, thunkAPI) => {
+  try {
+    await axios.put(`todos/${body.id}`, body);
+    thunkAPI.dispatch(fetchData());
+  } catch (error) {
+    return thunkAPI.rejectWithValue(error.message);
+  }
+});

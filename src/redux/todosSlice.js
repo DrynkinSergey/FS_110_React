@@ -4,6 +4,7 @@ import { addTodoThunk, deleteTodo, editTodoThunk, fetchData } from './operations
 const initialState = {
   todos: [],
   filter: '',
+  filterByStatus: 'all',
   isLoading: false,
   isError: false,
 };
@@ -18,6 +19,9 @@ const slice = createSlice({
     },
     changeFilter: (state, action) => {
       state.filter = action.payload;
+    },
+    setFilterByStatus: (state, action) => {
+      state.filterByStatus = action.payload;
     },
   },
   extraReducers: builder => {
@@ -51,8 +55,9 @@ const slice = createSlice({
 });
 
 export const todosReducer = slice.reducer;
-export const { changeFilter, toggleFavorite } = slice.actions;
+export const { changeFilter, toggleFavorite, setFilterByStatus } = slice.actions;
 
+export const selectFilterByStatus = state => state.todos.filterByStatus;
 export const selectTodos = state => state.todos.todos;
 export const selectFilter = state => state.todos.filter;
 export const selectIsLoading = state => state.todos.isLoading;
