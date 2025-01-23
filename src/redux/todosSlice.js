@@ -56,9 +56,3 @@ const slice = createSlice({
 
 export const todosReducer = slice.reducer;
 export const { changeFilter, toggleFavorite, setFilterByStatus } = slice.actions;
-
-export const selectFilterByStatus = state => state.todos.filterByStatus;
-export const selectTodos = state => state.todos.todos;
-export const selectFilter = state => state.todos.filter;
-export const selectIsLoading = state => state.todos.isLoading;
-export const selectIsError = state => state.todos.isError;
