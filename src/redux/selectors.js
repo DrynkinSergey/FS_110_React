@@ -49,3 +49,11 @@ export const selectUncompletedTodosMemo = createSelector([selectTodos], todos =>
 
   return todos.reduce((total, curr) => (!curr.isCompleted ? total + 1 : total), 0);
 });
+
+// auth
+export const selectUser = state => state.auth.user;
+export const selectToken = state => state.auth.token;
+export const selectIsLoggedIn = state => state.auth.isLoggedIn;
+
+// articles
+export const selectArticles = state => state.articles.items;
