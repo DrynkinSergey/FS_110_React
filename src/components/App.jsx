@@ -9,6 +9,7 @@ import Company from './nestedRoutes/Company';
 import Users from '../pages/Users/Users';
 import UserDetails from '../pages/UserDetails/UserDetails';
 import UserPosts from './nestedRoutes/UserPosts';
+import PostDetails from './nestedRoutes/PostDetails';
 
 const App = () => {
   return (
@@ -26,7 +27,9 @@ const App = () => {
 
         <Route path='/users' element={<Users />} />
         <Route path='/users/:userId' element={<UserDetails />}>
-          <Route path='posts' element={<UserPosts />} />
+          <Route path='posts' element={<UserPosts />}>
+            <Route path=':postId' element={<PostDetails />} />
+          </Route>
           <Route path='info' element={<h2>some info</h2>} />
         </Route>
         <Route path='*' element={<NotFound />} />

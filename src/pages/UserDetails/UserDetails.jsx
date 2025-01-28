@@ -43,7 +43,9 @@ const UserDetails = () => {
           {/* localhost:5173/users/5/posts */}
         </ul>
       </nav>
-      <Outlet />
+      <div>
+        <Outlet />
+      </div>
     </div>
   );
 };

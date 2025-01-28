@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { Link, Outlet, useParams } from 'react-router-dom';
 import { fetchPostsByUserId } from '../../services/api';
 
 const UserPosts = () => {
@@ -15,14 +15,21 @@ const UserPosts = () => {
     getData();
   }, [userId]);
   return (
-    <div>
-      User posts
-      <ul>
-        {!posts.length && <h2>No posts yet...</h2>}
-        {posts.map(item => (
-          <li key={item.id}> {item.title}</li>
-        ))}
-      </ul>
+    <div className='postDetails'>
+      <section>
+        User posts
+        <ul>
+          {!posts.length && <h2>No posts yet...</h2>}
+          {posts.map(item => (
+            <Link key={item.id} to={item.id.toString()}>
+              <li> {item.title}</li>
+            </Link>
+          ))}
+        </ul>
+      </section>
+      <div className='outlet'>
+        <Outlet />
+      </div>
     </div>
   );
 };
