@@ -8,7 +8,7 @@ export const AddForm = () => {
   const initialValues = { todo: '' };
   const onSubmit = (values, options) => {
     const newTodo = {
-      todo: values.todo,
+      text: values.todo,
     };
     dispatch(addTodoThunk(newTodo));
     options.resetForm();

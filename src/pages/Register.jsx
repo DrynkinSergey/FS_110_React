@@ -1,6 +1,6 @@
 import { Field, Form, Formik } from 'formik';
 import { useDispatch } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { registerThunk } from '../redux/auhtOperations';
 
 const Register = () => {
@@ -10,15 +10,18 @@ const Register = () => {
     name: '',
   };
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const handleSubmit = (values, options) => {
     console.log(values);
-    dispatch(registerThunk(values));
+    dispatch(registerThunk(values))
+      .unwrap()
+      .then(() => navigate('/'));
     options.resetForm();
   };
   return (
     <div className='min-h-screen flex flex-col justify-center items-center'>
       <Formik initialValues={initialValues} onSubmit={handleSubmit}>
-        <Form className='bg-white rounded-3xl shadow-xl p-4 flex flex-col gap-4 w-1/4'>
+        <Form className='bg-white rounded-3xl shadow-xl p-4 flex flex-col md:bg-gray-100 xl:bg-slate-200 gap-4 w-1/2 md:w-1/3 xl:w-1/4  md:text-red-400 lg:text-blue-500'>
           <h3 className='text-center font-bold'>Register</h3>
           <label className='flex flex-col gap-2'>
             <span>Name:</span>

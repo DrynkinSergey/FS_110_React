@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { createAsyncThunk } from '@reduxjs/toolkit';
+import { goitApi } from './auhtOperations';
 
 axios.defaults.baseURL = 'https://678fdd0f49875e5a1a93a664.mockapi.io';
 
@@ -17,7 +18,7 @@ axios.defaults.baseURL = 'https://678fdd0f49875e5a1a93a664.mockapi.io';
 
 export const fetchData = createAsyncThunk('todos/fetchAllTodos', async (_, thunkAPI) => {
   try {
-    const { data } = await axios.get('/todos');
+    const { data } = await goitApi.get('/tasks');
     return data;
   } catch (error) {
     return thunkAPI.rejectWithValue(error.message);
@@ -26,7 +27,7 @@ export const fetchData = createAsyncThunk('todos/fetchAllTodos', async (_, thunk
 
 export const deleteTodo = createAsyncThunk('todos/deleteTodo', async (id, thunkAPI) => {
   try {
-    await axios.delete(`/todos/${id}`);
+    await goitApi.delete(`/todos/${id}`);
     thunkAPI.dispatch(fetchData());
   } catch (error) {
     return thunkAPI.rejectWithValue(error.message);
@@ -35,7 +36,7 @@ export const deleteTodo = createAsyncThunk('todos/deleteTodo', async (id, thunkA
 
 export const addTodoThunk = createAsyncThunk('todos/addTodo', async (body, thunkAPI) => {
   try {
-    await axios.post('todos', body);
+    await goitApi.post('tasks', body);
     thunkAPI.dispatch(fetchData());
   } catch (error) {
     return thunkAPI.rejectWithValue(error.message);
@@ -44,7 +45,7 @@ export const addTodoThunk = createAsyncThunk('todos/addTodo', async (body, thunk
 
 export const editTodoThunk = createAsyncThunk('todos/editTodo', async (body, thunkAPI) => {
   try {
-    await axios.put(`todos/${body.id}`, body);
+    await goitApi.patch(`tasks/${body.id}`, body);
     thunkAPI.dispatch(fetchData());
   } catch (error) {
     return thunkAPI.rejectWithValue(error.message);
@@ -53,7 +54,7 @@ export const editTodoThunk = createAsyncThunk('todos/editTodo', async (body, thu
 
 export const toggleTodo = createAsyncThunk('todos/toggle', async (body, thunkAPI) => {
   try {
-    await axios.put(`todos/${body.id}`, body);
+    await goitApi.patch(`tasks/${body.id}`, body);
     thunkAPI.dispatch(fetchData());
   } catch (error) {
     return thunkAPI.rejectWithValue(error.message);

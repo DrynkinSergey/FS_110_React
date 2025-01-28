@@ -6,7 +6,7 @@ import { selectFilter, selectFilteredTodos, selectFilteredTodosMemo } from '../.
 export const List = () => {
   const todos = useSelector(selectFilteredTodosMemo);
   const filter = useSelector(selectFilter);
-  const filteredData = todos.filter(item => item.todo.toLowerCase().includes(filter.toLowerCase()));
+  const filteredData = todos.filter(item => item.text.toLowerCase().includes(filter.toLowerCase()));
 
   return (
     <ul className={s.list}>
