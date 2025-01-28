@@ -5,7 +5,7 @@ import { SearchBar } from './SearchBar';
 import s from './TodoList.module.css';
 import { fetchData } from '../../redux/operations';
 import { useEffect } from 'react';
-import { selectIsError, selectIsLoading, selectUncompletedTodos, selectUncompletedTodosMemo } from '../../redux/selectors';
+import { selectIsError, selectIsLoading, selectUncompletedTodosMemo } from '../../redux/selectors';
 import Filter from './Filter';
 
 export const TodoList = () => {
