@@ -10,7 +10,7 @@ const Header = () => {
   return (
     <header>
       {/* petro223344@mail.com.ua */}
-      <h2>Redux toolkit + Selectors</h2>
+      <h2>Final | Auth</h2>
       {isLoggedIn && <h2>WELCOME, {user.name}</h2>}
       <nav className='flex gap-2 '>
         <NavLink to='/'>Home</NavLink>
