@@ -1,8 +1,9 @@
 import { useDispatch } from 'react-redux';
-import s from './TodoList.module.css';
-import { toggleFavorite } from '../../redux/todosSlice';
 import { FaStar } from 'react-icons/fa';
+
+import { toggleFavorite } from '../../redux/todosSlice';
 import { deleteTodo, editTodoThunk, toggleTodo } from '../../redux/operations';
+import s from './TodoList.module.css';
 
 const Item = ({ isCompleted, text, id, isFavorite }) => {
   const dispatch = useDispatch();

@@ -1,13 +1,17 @@
+import { useEffect } from 'react';
 import { Route, Routes } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+
 import Home from '../pages/Home';
 import NotFound from '../pages/NotFound';
 import Todos from '../pages/Todos';
-import Layout from './Layout';
 import Login from '../pages/Login';
 import Register from '../pages/Register';
-import { useDispatch, useSelector } from 'react-redux';
+import Layout from './Layout';
+import PrivateRoute from './PrivateRoute';
+import PublicRoute from './PublicRoute';
+
 import { refreshUserThunk } from '../redux/auhtOperations';
-import { useEffect } from 'react';
 import { selectIsRefreshing } from '../redux/selectors';
 
 const App = () => {
@@ -18,12 +22,33 @@ const App = () => {
   }, [dispatch]);
   return isRefreshing ? null : (
     <Routes>
-      <Route path='/' element={<Layout />}>
+      <Route
+        path='/'
+        element={
+          <PrivateRoute>
+            <Layout />
+          </PrivateRoute>
+        }
+      >
         <Route index element={<Home />} />
         <Route path='todos' element={<Todos />} />
       </Route>
-      <Route path='/register' element={<Register />} />
-      <Route path='/login' element={<Login />} />
+      <Route
+        path='/register'
+        element={
+          <PublicRoute>
+            <Register />
+          </PublicRoute>
+        }
+      />
+      <Route
+        path='/login'
+        element={
+          <PublicRoute>
+            <Login />
+          </PublicRoute>
+        }
+      />
       <Route path='*' element={<NotFound />} />
     </Routes>
   );

@@ -1,7 +1,8 @@
 import { Field, Form, Formik } from 'formik';
-import s from './TodoList.module.css';
 import { useDispatch } from 'react-redux';
+
 import { addTodoThunk } from '../../redux/operations';
+import s from './TodoList.module.css';
 
 export const AddForm = () => {
   const dispatch = useDispatch();
